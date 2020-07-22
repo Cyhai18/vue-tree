@@ -1,28 +1,43 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+
+    <tree ref="tree" :initData="treeData" @changeSel='changeSel'>
+      <template v-slot="{ item }">
+        <div>{{ item.label }}</div>
+      </template>
+    </tree>
+
+    <div style="margin-top: 20px">
+      <button @click="$refs.tree.expandAll()">展开所有</button>
+      <button @click="$refs.tree.collapseAll()" style="margin: 0 10px">折叠所有</button>
+      <button @click="$refs.tree.checkAll()" style="margin-right: 10px">选择所有</button>
+      <button @click="$refs.tree.checkCancel()">反选所有</button>
+    </div>
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import tree from './components/tree'
+import generateData from "./utils/generateTreeData"
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    tree
+  },
+  computed: {
+    treeData () {
+      return generateData()
+    }
+  },
+  methods: {
+    changeSel (val) {
+      console.log(val)
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>

@@ -1,10 +1,10 @@
 {
   "name": "vue-tree",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "lib": "vue-cli-service build --target lib --name tree --dest lib src/components/index.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
